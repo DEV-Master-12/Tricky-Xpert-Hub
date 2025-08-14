@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tricky Xpert Hub</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: linear-gradient(90deg, #ff0057, #ff7b00);
+            padding: 20px;
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .categories {
+            display: flex;
+            overflow-x: auto;
+            white-space: nowrap;
+            background-color: #1e1e1e;
+            padding: 10px;
+            gap: 10px;
+        }
+        .categories button {
+            background: #2a2a2a;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+        .categories button.active,
+        .categories button:hover {
+            background: #ff0057;
+        }
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            justify-items: start;
+        }
+        .card {
+            background: #1e1e1e;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+            text-align: center;
+        }
+        .card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+        .card p {
+            padding: 10px;
+            font-size: 18px;
+            font-weight: 500;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(255, 0, 87, 0.5);
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Loading screen */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #1f1f1f;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255,255,255,0.2);
+            border-top: 5px solid #ff0057;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Loading Screen -->
+<div id="loading-screen">
+    <div class="loader"></div>
+</div>
+
+<header>Tricky Xpert Hub</header>
+
+<div class="categories">
+    <button class="active" onclick="filterCards('all')">All</button>
+    <button onclick="filterCards('cloud')">Cloud Gaming</button>
+    <button onclick="filterCards('gaming')">Gaming</button>
+</div>
+
+<div class="card-grid">
+    <!-- Cloud Gaming -->
+    <a href="https://gamenow.gg" target="_blank" class="card cloud">
+        <img src="gamenow.gg.jpg" alt="GameNow.gg">
+        <p>GameNow.gg</p>
+    </a>
+    <a href="https://now.gg" target="_blank" class="card cloud">
+        <img src="now.gg.png" alt="Now.gg">
+        <p>Now.gg</p>
+    </a>
+    <a href="https://chikiigame.com" target="_blank" class="card cloud">
+        <img src="chikii.jpg" alt="Chikii Game">
+        <p>Chikii Game</p>
+    </a>
+
+    <!-- Gaming -->
+      <!-- Gaming -->
+    <a href="https://eaglercraft.com" target="_blank" class="card gaming">
+        <img src="eaglercraft.jpg" alt="Eaglercraft">
+        <p>Eaglercraft</p>
+    </a>
+    <a href="https://bloxd.io" target="_blank" class="card gaming">
+        <img src="bloxd.jpg" alt="Bloxd.io">
+        <p>Bloxd.io</p>
+    </a>
+    <a href="https://deadshot.io" target="_blank" class="card gaming">
+        <img src="deadshot.jpg" alt="Deadshot.io">
+        <p>Deadshot.io</p>
+    </a>
+    <a href="https://venge.io" target="_blank" class="card gaming">
+        <img src="venge.jpg" alt="Venge.io">
+        <p>Venge.io</p>
+    </a>
+    <a href="https://ev.io" target="_blank" class="card gaming">
+        <img src="evio.jpg" alt="Ev.io">
+        <p>Ev.io</p>
+    </a>
+    <a href="https://krunker.io" target="_blank" class="card gaming">
+        <img src="krunker.jpg" alt="Krunker.io">
+        <p>Krunker.io</p>
+    </a>
+    <a href="https://slither.io" target="_blank" class="card gaming">
+        <img src="slither.jpg" alt="Slither.io">
+        <p>Slither.io</p>
+    </a>
+</div>
+
+<script>
+    function filterCards(category) {
+        let cards = document.querySelectorAll('.card');
+        let buttons = document.querySelectorAll('.categories button');
+
+        buttons.forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+
+        cards.forEach(card => {
+            if (category === 'all' || card.classList.contains(category)) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    // Loading screen
+    document.addEventListener("DOMContentLoaded", function(){
+        let loadingTime = Math.floor(Math.random() * (5000 - 2000 + 1)) + 2000;
+        setTimeout(() => {
+            document.getElementById('loading-screen').style.display = 'none';
+        }, loadingTime);
+    });
+</script>
+
+</body>
+</html>
