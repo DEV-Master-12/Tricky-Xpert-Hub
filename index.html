@@ -42,11 +42,20 @@
             background: #ff0057;
         }
         .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-            padding: 20px;
-            justify-items: start;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+        padding: 20px;
+        justify-items: start; /* ye hattana hoga */
+        }
+
+        /* Ye add kar */
+        @media (max-width: 768px) {
+        .card-grid {
+        justify-items: center;
+            }
+        }
+
         }
         .card {
             background: #1e1e1e;
@@ -193,3 +202,4 @@
 
 </body>
 </html>
+
